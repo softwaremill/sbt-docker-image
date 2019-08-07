@@ -39,7 +39,8 @@ spec:
             container(name: 'kaniko', shell: '/busybox/sh') {
                 stage('Build') {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                        sh 'docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}'
+                        sh '''#!/busybox/sh
+                        docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}'''
                     }
                     withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
                         sh """#!/busybox/sh
