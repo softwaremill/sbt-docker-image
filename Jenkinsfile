@@ -16,6 +16,18 @@ spec:
     command:
     - /busybox/cat
     tty: true
+    volumeMounts:
+      - name: docker-config-json
+        mountPath: /kaniko/.docker
+  volumes:
+  - name: docker-config-json
+    projected:
+      sources:
+      - secret:
+          name: sml-docker-cred
+          items:
+            - key: .dockerconfigjson
+              path: config.json
 """
 ) {
 
@@ -26,6 +38,9 @@ spec:
             }
             container(name: 'kaniko', shell: '/busybox/sh') {
                 stage('Build') {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                        sh 'docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}'
+                    }
                     withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
                         sh """#!/busybox/sh
                         /kaniko/executor -f `pwd`/Dockerfile \\
