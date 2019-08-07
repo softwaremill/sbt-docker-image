@@ -42,7 +42,7 @@ spec:
                         withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
                             sh """#!/busybox/sh
                         /kaniko/executor -f `pwd`/Dockerfile \\
-                            -c `pwd` --cache=true \\
+                            -c `pwd` \\
                             --build-arg BASE_IMAGE=$baseImageTag \\
                             --build-arg SCALA_VERSION=$scalaVersion \\
                             --build-arg SBT_VERSION=$sbtVersion \\
