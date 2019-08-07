@@ -33,13 +33,14 @@ spec:
 
     node(label) {
         try {
-            stage('Checkout') {
-                checkout scm
-            }
-            container(name: 'kaniko', shell: '/busybox/sh') {
-                stage('Build') {
-                    withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
-                        sh """#!/busybox/sh
+            ansiColor('xterm') {
+                stage('Checkout') {
+                    checkout scm
+                }
+                container(name: 'kaniko', shell: '/busybox/sh') {
+                    stage('Build') {
+                        withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
+                            sh """#!/busybox/sh
                         /kaniko/executor -f `pwd`/Dockerfile \\
                             -c `pwd` --cache=true \\
                             --build-arg BASE_IMAGE=$baseImageTag \\
@@ -47,6 +48,7 @@ spec:
                             --build-arg SBT_VERSION=$sbtVersion \\
                             --destination $dockerRepo:${baseImageTag}_${scalaVersion}_${sbtVersion}
                         """
+                        }
                     }
                 }
             }
