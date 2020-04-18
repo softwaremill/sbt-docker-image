@@ -4,6 +4,9 @@ FROM openjdk:$BASE_IMAGE
 ARG SCALA_VERSION 
 ARG SBT_VERSION 
 
+# Install openssl dev libs
+RUN apt update && apt install -y libssl-dev
+
 # Install Scala
 RUN \
   curl -fsL https://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /root/ && \
