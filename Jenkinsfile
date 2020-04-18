@@ -1,5 +1,5 @@
 def label = "${UUID.randomUUID().toString()}"
-def baseImageTag = "8u222-jdk"
+def baseImageTag = "11.0.7-jdk"
 def scalaVersion = "2.12.8"
 def sbtVersion = "1.2.8"
 def dockerRepo = "softwaremill/sbt-jenkins"
