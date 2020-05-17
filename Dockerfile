@@ -57,6 +57,11 @@ RUN \
     apt install -y nodejs && \
     rm -rf /var/lib/apt/lists/*
 
+# Install yarn
+RUN \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+    apt update && apt install -y yarn
 
 # Add jenkins user
 RUN useradd -u 1000 -d /home/jenkins -m jenkins
