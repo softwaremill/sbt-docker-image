@@ -45,7 +45,7 @@ RUN \
     apt install -y ./google-chrome*.deb && \
     rm -rf /var/lib/apt/lists/*
 RUN \
-    wget https://chromedriver.storage.googleapis.com/2.38/chromedriver_linux64.zip && \
+    wget https://chromedriver.storage.googleapis.com/81.0.4044.138/chromedriver_linux64.zip && \
     mkdir -p /opt/chromedriver && \
     unzip chromedriver_linux64.zip -d /opt/chromedriver/ && \
     rm -rf chromedriver_linux64.zip
