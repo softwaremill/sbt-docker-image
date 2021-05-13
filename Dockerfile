@@ -82,9 +82,12 @@ RUN \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
     apt update && apt install -y yarn
 
+# Install helm
+RUN \
+    curl -sS https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash && \
+    helm plugin install https://github.com/chartmuseum/helm-push
+
 # Add jenkins user
 RUN useradd -u 1000 -d /home/jenkins -m jenkins
 USER jenkins
 WORKDIR /home/jenkins
-
-

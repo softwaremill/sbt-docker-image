@@ -1,7 +1,7 @@
 def label = "${UUID.randomUUID().toString()}"
-def baseImageTag = "11.0.7-jdk"
-def scalaVersion = "2.12.8"
-def sbtVersion = "1.2.8"
+def baseImageTag = "11.0.11-jdk"
+def scalaVersion = "2.13.3"
+def sbtVersion = "1.4.9"
 def dockerRepo = "softwaremill/sbt-jenkins"
 
 podTemplate(label: label, yaml: """
